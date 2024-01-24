@@ -5,40 +5,17 @@ add_subdirectory(vendor/trollworks-sdk-backend-sdl)
 
 file(GLOB_RECURSE TROLLWORKS_IMGUI_SDL_SOURCES
   ${PROJECT_SOURCE_DIR}/src/*.cpp
+  ${PROJECT_SOURCE_DIR}/vendor/imgui/*.cpp
 )
 
 file(GLOB_RECURSE TROLLWORKS_IMGUI_SDL_HEADERS
   ${PROJECT_SOURCE_DIR}/include/*.hpp
-)
-
-set(IMGUI_SOURCES
-  "${PROJECT_SOURCE_DIR}/vendor/imgui/imgui.cpp"
-  "${PROJECT_SOURCE_DIR}/vendor/imgui/imgui_tables.cpp"
-  "${PROJECT_SOURCE_DIR}/vendor/imgui/imgui_widgets.cpp"
-  "${PROJECT_SOURCE_DIR}/vendor/imgui/imgui_draw.cpp"
-  "${PROJECT_SOURCE_DIR}/vendor/imgui/imgui_demo.cpp"
-  "${PROJECT_SOURCE_DIR}/vendor/imgui/misc/cpp/imgui_stdlib.cpp"
-  "${PROJECT_SOURCE_DIR}/vendor/imgui/backends/imgui_impl_sdl2.cpp"
-  "${PROJECT_SOURCE_DIR}/vendor/imgui/backends/imgui_impl_sdlrenderer2.cpp"
-)
-
-set(IMGUI_HEADERS
-  "${PROJECT_SOURCE_DIR}/vendor/imgui/imgui.h"
-  "${PROJECT_SOURCE_DIR}/vendor/imgui/imconfig.h"
-  "${PROJECT_SOURCE_DIR}/vendor/imgui/imgui_internal.h"
-  "${PROJECT_SOURCE_DIR}/vendor/imgui/imstb_rectpack.h"
-  "${PROJECT_SOURCE_DIR}/vendor/imgui/imstb_textedit.h"
-  "${PROJECT_SOURCE_DIR}/vendor/imgui/imstb_truetype.h"
-  "${PROJECT_SOURCE_DIR}/vendor/imgui/misc/cpp/imgui_stdlib.h"
-  "${PROJECT_SOURCE_DIR}/vendor/imgui/backends/imgui_impl_sdl2.h"
-  "${PROJECT_SOURCE_DIR}/vendor/imgui/backends/imgui_impl_sdlrenderer2.h"
+  ${PROJECT_SOURCE_DIR}/vendor/imgui/*.h
 )
 
 add_library(${PROJECT_NAME} STATIC
   ${TROLLWORKS_IMGUI_SDL_SOURCES}
   ${TROLLWORKS_IMGUI_SDL_HEADERS}
-  ${IMGUI_SOURCES}
-  ${IMGUI_HEADERS}
 )
 
 if(WIN32)
@@ -79,7 +56,7 @@ target_include_directories(${PROJECT_NAME}
 )
 
 target_compile_options(${PROJECT_NAME} PRIVATE
-  -O2 -Wall -Werror -Wextra -std=c++23
+  -O2 -Wall -Wextra -std=c++23
 )
 
 install(TARGETS ${PROJECT_NAME} DESTINATION lib)

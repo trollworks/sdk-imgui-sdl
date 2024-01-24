@@ -1,3 +1,6 @@
 [submodule "vendor/imgui"]
 	path = vendor/imgui
 	url = https://github.com/ocornut/imgui.git
+[submodule "vendor/trollworks-sdk-backend-sdl"]
+	path = vendor/trollworks-sdk-backend-sdl
+	url = https://github.com/trollworks/sdk-backend-sdl.git

@@ -15,5 +15,4 @@ cmake ../.. \
   -G "MinGW Makefiles" \
   -DCMAKE_BUILD_TYPE=$build_type \
   -DCMAKE_MAKE_PROGRAM=make \
-  -DCMAKE_CXX_COMPILER=g++ \
-  -DCMAKE_C_COMPILER=gcc
+  -DCMAKE_CXX_COMPILER=g++

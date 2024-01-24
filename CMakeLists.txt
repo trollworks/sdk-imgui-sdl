@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.22)
 project(trollworks-sdk-imgui-sdl CXX)
 
-add_subdirectory(vendor/trollworks-sdk-backend-sdl)
-
 file(GLOB_RECURSE TROLLWORKS_IMGUI_SDL_SOURCES
   ${PROJECT_SOURCE_DIR}/src/*.cpp
   ${PROJECT_SOURCE_DIR}/vendor/imgui/*.cpp
@@ -18,41 +16,13 @@ add_library(${PROJECT_NAME} STATIC
   ${TROLLWORKS_IMGUI_SDL_HEADERS}
 )
 
-if(WIN32)
-  target_link_libraries(${PROJECT_NAME}
-    trollworks-sdk-backend-sdl
-    SDL2-static
-    SDL2_image
-    opengl32
-    glu32
-  )
-elseif(APPLE)
-  target_link_libraries(${PROJECT_NAME}
-    trollworks-sdk-backend-sdl
-    SDL2-static
-    SDL2_image
-    opengl
-    glu
-  )
-elseif(UNIX)
-  target_link_libraries(${PROJECT_NAME}
-    trollworks-sdk-backend-sdl
-    SDL2-static
-    SDL2_image
-    opengl
-    glu
-  )
-else()
-  message(FATAL_ERROR "Platform not supported")
-endif()
-
 target_include_directories(${PROJECT_NAME}
   PUBLIC ${PROJECT_SOURCE_DIR}/include
   PRIVATE ${PROJECT_SOURCE_DIR}/vendor/trollworks-sdk-core/include
-  PRIVATE "$<TARGET_PROPERTY:trollworks-sdk-backend-sdl,INTERFACE_INCLUDE_DIRECTORIES>"
-  PRIVATE "$<TARGET_PROPERTY:nlohmann_json::nlohmann_json,INTERFACE_INCLUDE_DIRECTORIES>"
-  PRIVATE "$<TARGET_PROPERTY:SDL2-static,INTERFACE_INCLUDE_DIRECTORIES>"
-  PRIVATE "$<TARGET_PROPERTY:SDL2_image,INTERFACE_INCLUDE_DIRECTORIES>"
+  PRIVATE ${PROJECT_SOURCE_DIR}/vendor/trollworks-sdk-backend-sdl/include
+  PRIVATE ${PROJECT_SOURCE_DIR}/vendor/trollworks-sdk-backend-sdl/vendor/nlohmann-json/include
+  PRIVATE ${PROJECT_SOURCE_DIR}/vendor/trollworks-sdk-backend-sdl/vendor/SDL/upstream/include
+  PRIVATE ${PROJECT_SOURCE_DIR}/vendor/trollworks-sdk-backend-sdl/vendor/SDL_image/upstream/include
 )
 
 target_compile_options(${PROJECT_NAME} PRIVATE

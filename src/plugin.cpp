@@ -7,7 +7,7 @@ namespace tw::sdl::ui {
     : m_backend(backend)
   {}
 
-  void imgui_sdl_plugin::setup(controlflow& cf) {
+  void imgui_sdl_plugin::setup(controlflow&) {
     m_ctx = ImGui::CreateContext();
     if (m_ctx == nullptr) {
       SDL_Log("Failed to create ImGui context");

@@ -965,9 +965,9 @@ CODE
 #define IMGUI_DEFINE_MATH_OPERATORS
 #endif
 
-#include "imgui.h"
+#include <imgui/imgui.h>
 #ifndef IMGUI_DISABLE
-#include "imgui_internal.h"
+#include <imgui/imgui_internal.h>
 
 // System includes
 #include <stdio.h>      // vsnprintf, sscanf, printf
@@ -1956,7 +1956,7 @@ const char* ImStrSkipBlank(const char* str)
 #ifdef IMGUI_STB_SPRINTF_FILENAME
 #include IMGUI_STB_SPRINTF_FILENAME
 #else
-#include "stb_sprintf.h"
+#include <imgui/stb_sprintf.h>
 #endif
 #endif // #ifdef IMGUI_USE_STB_SPRINTF
 

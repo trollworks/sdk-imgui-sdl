@@ -1,6 +1,8 @@
 #include <cstdlib>
 
-#include "../include/trollworks-imgui-sdl/plugin.hpp"
+#include <trollworks-imgui-sdl.hpp>
+#include <imgui/imgui_impl_sdl2.h>
+#include <imgui/imgui_impl_sdlrenderer2.h>
 
 namespace tw::sdl::ui {
   imgui_sdl_plugin::imgui_sdl_plugin(sdl_backend& backend)

@@ -3,6 +3,7 @@
         {
             "name": "Default",
             "includePath": [
+                "${workspaceFolder}/include",
                 "${workspaceFolder}/.shipp/dist/include",
                 "${workspaceFolder}/.shipp/dist/include/SDL2"
             ],

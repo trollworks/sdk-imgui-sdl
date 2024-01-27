@@ -2,8 +2,8 @@
 
 #include <cstdlib>
 
-#include "../../vendor/trollworks-sdk-core/include/trollworks.hpp"
-#include "../../vendor/trollworks-sdk-backend-sdl/include/trollworks-backend-sdl.hpp"
+#include <trollworks.hpp>
+#include <trollworks-backend-sdl.hpp>
 
 #include "./imgui.hpp"
 

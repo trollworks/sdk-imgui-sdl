@@ -19,6 +19,7 @@ namespace tw::sdl::ui {
 
     public:
       imgui_sdl_plugin(sdl_backend& backend);
+      imgui_sdl_plugin(const imgui_sdl_plugin&) = delete;
 
       template <auto Candidate, typename... Args>
       imgui_sdl_plugin& on_render(Args&&... args) {

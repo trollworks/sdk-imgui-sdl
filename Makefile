@@ -1,27 +1,39 @@
+BUILDDIR = $(PWD)/__build__
+PREFIX := /usr/local
+DESTDIR := $(PREFIX)
+
+CXX := g++
+CXXFLAGS := -std=c++23 -O2 -g -I$(PWD)/include -I$(PREFIX)/include -I$(PREFIX)/include/SDL2
+
+AR := ar
+ARFLAGS := rcs
+
+SOURCES = $(shell find src -name "*.cpp")
+OBJECTS = $(patsubst src/%.cpp, $(BUILDDIR)/%.o, $(SOURCES))
+DEPS    = $(patsubst %.o, %.d, $(OBJECTS))
+TARGET  = $(BUILDDIR)/libtrollworks-sdk-imgui-sdl.a
+
 .PHONY: all
-all:
-	@echo "Targets:"
-	@echo "  - build.debug"
-	@echo "  - build.release"
-	@echo "  - install.debug"
-	@echo "  - install.release"
+all: $(TARGET)
 
-.PHONY: build.debug
-build.debug:
-	@./autogen.sh
-	@make -C __build__/debug/
+.PHONY: install
+install:
+	@mkdir -p $(DESTDIR)/include
+	@cp -R $(PWD)/include $(DESTDIR)
+	@cp $(TARGET) $(DESTDIR)/lib
 
-.PHONY: build.release
-build.release:
-	@./autogen.sh -r
-	@make -C __build__/release/
+.PHONY: clean
+clean:
+	@rm -vrf $(BUILDDIR)
 
-.PHONY: install.debug
-install.debug:
-	@./autogen.sh
-	@make -C __build__/debug/ install
+$(TARGET): $(OBJECTS)
+	@mkdir -p $(@D)
+	@echo "  AR      $(patsubst $(BUILDDIR)/%, %, $@)"
+	@$(AR) $(ARFLAGS) $@ $^
 
-.PHONY: install.release
-install.release:
-	@./autogen.sh -r
-	@make -C __build__/release/ install
+$(BUILDDIR)/%.o: src/%.cpp
+	@mkdir -p $(@D)
+	@echo "  CXX     $(patsubst $(BUILDDIR)/%, %, $@)"
+	@$(CXX) $(CXXFLAGS) -MMD -c -o $@ $<
+
+-include $(DEPS)

@@ -4,6 +4,8 @@
 #include <imgui/imgui_impl_sdl2.h>
 #include <imgui/imgui_impl_sdlrenderer2.h>
 
+using namespace entt::literals;
+
 namespace tw::sdl::ui {
   imgui_sdl_plugin::imgui_sdl_plugin(sdl_backend& backend)
     : m_backend(backend)
@@ -40,6 +42,11 @@ namespace tw::sdl::ui {
 
   void imgui_sdl_plugin::process_event(const SDL_Event& event, controlflow&) {
     ImGui_ImplSDL2_ProcessEvent(&event);
+
+    auto& io = ImGui::GetIO();
+    auto& registry = scene_manager::main().registry();
+    registry.ctx().insert_or_assign(TW_SDL_UI_CAPTURE_MOUSE_KEY, io.WantCaptureMouse);
+    registry.ctx().insert_or_assign(TW_SDL_UI_CAPTURE_KEYBOARD_KEY, io.WantCaptureKeyboard);
   }
 
   void imgui_sdl_plugin::render() {
